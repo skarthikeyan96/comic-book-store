@@ -1,8 +1,19 @@
-import Head from 'next/head'
-import { Typography } from '@mui/material'
+import Head from "next/head";
+import { Box, Button, Typography } from "@mui/material";
+import { useRouter } from "next/router";
+import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
 
+import React from "react";
+import toast, { Toaster } from "react-hot-toast";
+import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
+import Link from "next/link";
 
 export default function Home() {
+  const router = useRouter();
+  const session = useSession();
+  const supabase = useSupabaseClient();
+
+
   return (
     <>
       <Head>
@@ -12,10 +23,31 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-      <Typography variant="h2" paddingTop={4} textAlign="center">
-         Next.js + Material Starter
-      </Typography>
+        <Typography variant="h2" paddingTop={4} textAlign="center">
+          Comic book store Dashboard
+        </Typography>
+
+        {
+          ! session && <Button LinkComponent={Link} href="/auth"> Login </Button>
+        }
+        {/* <Box margin="0 auto" maxWidth="50%" sx={{ padding: "50px 0 100px 0" }}>
+          {!session ? (
+            <Auth
+              supabaseClient={supabase}
+              appearance={{ theme: ThemeSupa }}
+              theme="light"
+            />
+          ) : (
+            <p>
+              Account page will go here.
+              <Button onClick={handleLogout} variant="contained">
+                Logout
+              </Button>
+            </p>
+          )}
+        </Box>
+        <Toaster /> */}
       </main>
     </>
-  )
+  );
 }
