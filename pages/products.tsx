@@ -2,14 +2,12 @@ import Navbar from "../components/navbar";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 
 import Box from "@mui/material/Box";
-import { Grid, ImageList, Toolbar } from "@mui/material";
+import { Toolbar } from "@mui/material";
 import { GetServerSidePropsContext } from "next";
-import { useSession } from "@supabase/auth-helpers-react";
 import React from "react";
 import ProductCard from "../components/productCard";
 
 const Products = (props: any) => {
-  const session = useSession();
 
   console.log(props);
   return (

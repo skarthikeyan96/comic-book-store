@@ -13,31 +13,18 @@ import IconButton from "@mui/material/IconButton";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number
-) {
-  return { name, calories, fat, carbs, protein };
-}
+import { useSession } from "@supabase/auth-helpers-react";
+import toast, {Toaster} from "react-hot-toast";
 
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-
-export default function TableComponent(props: any) {
+export default function ProductListComponent() {
   // Extracting cart state from redux store
   const cart = useSelector((state: any) => state.cart);
 
   // Reference to the dispatch function from redux store
   const dispatch = useDispatch();
 
+  const session = useSession();
+  
   const getTotalPrice = () => {
     return cart.reduce(
       (accumulator: number, item: { quantity: number; price: number }) =>
@@ -45,6 +32,15 @@ export default function TableComponent(props: any) {
       0
     );
   };
+
+  const handleCheckout = () => {
+    if(session){
+      initateCheckout(cart)
+    }
+
+    toast('Please login to checkout the products')
+   
+  }
 
   return (
     <TableContainer component={Paper}>
@@ -88,13 +84,14 @@ export default function TableComponent(props: any) {
                   </IconButton>
                 </Stack>
               </TableCell>
+              <Toaster/>
             </TableRow>
           ))}
         </TableBody>
       </Table>
       <Box p={4} textAlign={"right"}>
         <Typography> Grand Total: ₹ {Number.parseInt(getTotalPrice()) * 70} </Typography>
-        <Button variant="contained" sx={{marginTop: "1rem"}} onClick={() => initateCheckout(cart)}>Checkout</Button>
+        <Button variant="contained" sx={{marginTop: "1rem"}} onClick={handleCheckout}>Checkout</Button>
       </Box>
     </TableContainer>
   );

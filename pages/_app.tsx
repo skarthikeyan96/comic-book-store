@@ -2,7 +2,6 @@ import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs'
 import { SessionContextProvider, Session } from '@supabase/auth-helpers-react'
 import { AppProps } from 'next/app'
 import React from 'react'
-import Navbar from '../components/navbar'
 import '../styles/globals.css'
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';

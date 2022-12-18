@@ -1,11 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const cartSlice = createSlice({
-  name: 'cart',
+  name: "cart",
   initialState: [],
   reducers: {
-    addToCart: (state:any, action:any) => {
-      const itemExists:any = state.find((item:any) => item.id === action.payload.id);
+    addToCart: (state: any, action: any) => {
+      const itemExists: any = state.find(
+        (item: any) => item.id === action.payload.id
+      );
       if (itemExists) {
         itemExists.quantity++;
       } else {
@@ -13,20 +15,22 @@ const cartSlice = createSlice({
       }
     },
     incrementQuantity: (state, action) => {
-      const item:any = state.find((item:any) => item.id === action.payload);
+      const item: any = state.find((item: any) => item.id === action.payload);
       item.quantity++;
     },
     decrementQuantity: (state, action) => {
-      const item:any  = state.find((item:any) => item.id === action.payload);
+      const item: any = state.find((item: any) => item.id === action.payload);
       if (item.quantity === 1) {
-        const index = state.findIndex((item:any) => item.id === action.payload);
+        const index = state.findIndex(
+          (item: any) => item.id === action.payload
+        );
         state.splice(index, 1);
       } else {
         item.quantity--;
       }
     },
     removeFromCart: (state, action) => {
-      const index = state.findIndex((item:any) => item.id === action.payload);
+      const index = state.findIndex((item: any) => item.id === action.payload);
       state.splice(index, 1);
     },
   },

@@ -13,18 +13,16 @@ import {
   Toolbar,
   Typography,
   Stack,
-  Badge,
 } from "@mui/material";
 import React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useRouter } from "next/router";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
 import NextLink from "next/link";
 import { useSelector } from "react-redux";
-const navItems = ["Home", "About", "Contact"];
 
-const Navbar = () => {
+const AdminNavbar = () => {
   const session = useSession();
 
   const supabase = useSupabaseClient();
@@ -36,25 +34,7 @@ const Navbar = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
-
-    if (error) {
-      toast("something went wrong");
-    }
-
-    router.push("/");
-  };
-
   const cart = useSelector((state: any) => state.cart);
-
-  const getTotalQuantity = () => {
-    return cart.reduce(
-      (accumulator: number, item: { quantity: number; price: number }) =>
-        accumulator + item.quantity,
-      0
-    );
-  };
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
@@ -121,61 +101,20 @@ const Navbar = () => {
             justifyContent="center"
           >
             <Link
-              href="/products"
+              href="/product/new"
+              component={NextLink}
+              sx={{ textDecoration: "none", color: "#fff", fontWeight: "bold" }}
+            >
+              New Product
+            </Link>
+
+            <Link
+              href="/products_admin"
               component={NextLink}
               sx={{ textDecoration: "none", color: "#fff", fontWeight: "bold" }}
             >
               Products
             </Link>
-
-            <Link
-              href="/cart"
-              component={NextLink}
-              sx={{ textDecoration: "none", color: "#fff", fontWeight: "bold" }}
-            >
-              <Badge color="secondary" badgeContent={getTotalQuantity()}>
-                {" "}
-                Cart{" "}
-              </Badge>
-            </Link>
-
-            {session ? (
-              <>
-                <Link
-                  href="/profile"
-                  component={NextLink}
-                  sx={{
-                    textDecoration: "none",
-                    color: "#fff",
-                    fontWeight: "bold",
-                    display: "none",
-                  }}
-                >
-                  Profile
-                </Link>
-
-                <Link
-                  onClick={handleLogout}
-                  href="#"
-                  component={NextLink}
-                  sx={{
-                    color: "#fff",
-                    fontWeight: "bold",
-                    textTransform: "captialize",
-                  }}
-                >
-                  Logout
-                </Link>
-              </>
-            ) : (
-              <Link
-                href="/auth"
-                component={NextLink}
-                sx={{ textDecoration: "none", color: "#fff" }}
-              >
-                Login
-              </Link>
-            )}
           </Stack>
         </Toolbar>
       </AppBar>
@@ -200,4 +139,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default AdminNavbar;

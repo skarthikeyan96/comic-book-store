@@ -1,20 +1,10 @@
 import Head from "next/head";
-import { Box, Button, Toolbar, Typography } from "@mui/material";
-import { useRouter } from "next/router";
-import { Auth, ThemeSupa } from "@supabase/auth-ui-react";
+import { Toolbar } from "@mui/material";
 
 import React from "react";
-import toast, { Toaster } from "react-hot-toast";
-import { useSession, useSupabaseClient } from "@supabase/auth-helpers-react";
-import Link from "next/link";
 import Navbar from "../components/navbar";
 
 export default function Home() {
-  const router = useRouter();
-  const session = useSession();
-  const supabase = useSupabaseClient();
-
-
   return (
     <>
       <Head>
@@ -23,13 +13,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
-      <Navbar/>
 
-      
+      <Navbar />
+
       <main>
-      <Toolbar/>
-      <> Landing page </>
+        <Toolbar />
+        <img src="https://images.hdqwalls.com/download/marvel-vs-dc-1u-1920x1080.jpg" alt="landing page"/>
       </main>
     </>
   );
