@@ -145,7 +145,7 @@ const Navbar = () => {
 
               <Link
                 onClick={handleLogout}
-                LinkComponent={NextLink}
+                component={NextLink}
                 sx={{
                   
                   color: "#fff",
