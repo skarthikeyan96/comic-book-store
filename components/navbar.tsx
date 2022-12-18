@@ -145,6 +145,7 @@ const Navbar = () => {
 
               <Link
                 onClick={handleLogout}
+                href="#"
                 component={NextLink}
                 sx={{
                   
