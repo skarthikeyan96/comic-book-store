@@ -1,9 +1,24 @@
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs"
 import { GetServerSidePropsContext } from "next"
+import Box from '@mui/material/Box'
+import Navbar from '../components/Navbar'
+import {Toolbar} from '@mui/material'
 
-const Profile = () => {
+const Profile = (props:any) => {
     return(
-        <> Profile </>
+      <> 
+
+      <Navbar/>
+      <Toolbar/> 
+      <Box p={3}> 
+         <> Profile </>
+         {
+          JSON.stringify(props.user)
+         }
+        </Box> 
+      </>
+      
+       
     )
 }
 
@@ -20,7 +35,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     if (!session)
       return {
         redirect: {
-          destination: '/',
+          destination: '/auth',
           permanent: false,
         },
       }

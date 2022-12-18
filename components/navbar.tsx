@@ -6,23 +6,25 @@ import {
   Divider,
   Drawer,
   IconButton,
+  Link,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
   Toolbar,
   Typography,
+  Stack
 } from "@mui/material";
 import React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useRouter } from "next/router";
 import toast, { Toaster } from "react-hot-toast";
-import { useSupabaseClient } from '@supabase/auth-helpers-react'
-
+import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react'
+import NextLink from 'next/link'
 const navItems = ["Home", "About", "Contact"];
 
-const Navbar = (props: any) => {
-  const { session } = props;
+const Navbar = () => {
+  const session = useSession();
 
   const supabase = useSupabaseClient()
   const router = useRouter();
@@ -70,7 +72,14 @@ const Navbar = (props: any) => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar component="nav">
+      <AppBar
+        component="nav"
+        sx={{
+          // bgcolor: "white",
+          // color: "black",
+          boxShadow: "none",
+        }}
+      >
         <Toolbar>
           <IconButton
             color="inherit"
@@ -86,15 +95,68 @@ const Navbar = (props: any) => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            Comic Store
+            <Link
+              href="/"
+              component={NextLink}
+              sx={{ textDecoration: "none", color: "#fff",                   fontWeight: "bold",
+            }}
+            >
+              {" "}
+              Comic ⚡️ Store{" "}
+            </Link>
           </Typography>
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {session && (
-              <Button sx={{ color: "#fff" }} onClick={handleLogout}>
+          <Stack
+            direction="row"
+            spacing={4}
+            alignItems="center"
+            justifyContent="center"
+          >
+            <Link
+              href="/products"
+              component={NextLink}
+              sx={{ textDecoration: "none", color: "#fff",                  fontWeight: "bold",
+            }}
+            >
+              {" "}
+              Products{" "}
+            </Link>
+
+            {session ? (
+
+              <> 
+               <Link
+              href="/profile"
+              component={NextLink}
+              sx={{ textDecoration: "none", color: "#fff",                   fontWeight: "bold",
+            }}
+              >
+              Profile
+              </Link>
+
+              <Link
+                onClick={handleLogout}
+                LinkComponent={NextLink}
+                sx={{
+                  
+                  color: "#fff",
+                  fontWeight: "bold",
+                  textTransform: "captialize"
+                }}
+              >
                 Logout
-              </Button>
+              </Link>
+              </>
+             
+            ) : (
+              <Link
+                href="/auth"
+                component={NextLink}
+                sx={{ textDecoration: "none", color: "#fff" }}
+              >
+                Login
+              </Link>
             )}
-          </Box>
+          </Stack>
         </Toolbar>
       </AppBar>
       <Box component="nav">

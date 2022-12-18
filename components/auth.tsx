@@ -9,9 +9,9 @@ const AuthComponent = () => {
 
   console.log(session)
   return (
-    <Box  sx={{ padding: '50px 0 100px 0' }}>
+    <Box maxWidth="30%" paddingTop={4}margin="0 auto" sx={{ minHeight: '100vh' }}>
       {!session ? (
-        <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} theme="dark" />
+        <Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }}/>
       ) : (
        <Products session={session}/>
       )}
