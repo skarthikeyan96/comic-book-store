@@ -6,8 +6,10 @@ import Navbar from '../components/navbar'
 import '../styles/globals.css'
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+import { Provider } from "react-redux";
 
 import Router from 'next/router';
+import store from "../redux/store"; // Importing redux store
 
 
 Router.events.on('routeChangeStart', (url) => {
@@ -27,9 +29,11 @@ function MyApp({
   const [supabase] = React.useState(() => createBrowserSupabaseClient())
 
   return (
+    <Provider store={store}>
     <SessionContextProvider supabaseClient={supabase} initialSession={pageProps.initialSession}>
       <Component {...pageProps} />
     </SessionContextProvider>
+    </Provider>
   )
 }
 export default MyApp

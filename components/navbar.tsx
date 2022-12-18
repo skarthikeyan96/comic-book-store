@@ -101,8 +101,8 @@ const Navbar = () => {
               sx={{ textDecoration: "none", color: "#fff",                   fontWeight: "bold",
             }}
             >
-              {" "}
-              Comic ⚡️ Store{" "}
+              
+              Comic ⚡️ Store
             </Link>
           </Typography>
           <Stack
@@ -117,8 +117,18 @@ const Navbar = () => {
               sx={{ textDecoration: "none", color: "#fff",                  fontWeight: "bold",
             }}
             >
-              {" "}
-              Products{" "}
+              
+              Products
+            </Link>
+
+            <Link
+              href="/cart"
+              component={NextLink}
+              sx={{ textDecoration: "none", color: "#fff",                  fontWeight: "bold",
+            }}
+            >
+              
+              Cart
             </Link>
 
             {session ? (

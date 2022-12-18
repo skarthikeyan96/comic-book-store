@@ -28,7 +28,7 @@ const ComicBook = (props: any) => {
           </Typography>
 
           <Typography component="span" paddingTop={2} fontSize="2rem">
-            $ {data.price}
+          ₹ {Number.parseInt(data.price) * 70 }
           </Typography>
           <Stack direction="row" spacing={4} paddingTop={4}> 
             <Button sx={{fontWeight:"bold"}} startIcon={<ShoppingCartOutlinedIcon/> } variant="contained"> 

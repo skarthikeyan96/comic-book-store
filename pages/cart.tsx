@@ -3,6 +3,7 @@ import { GetServerSidePropsContext } from "next"
 import Box from '@mui/material/Box'
 import Navbar from '../components/navbar'
 import {Toolbar} from '@mui/material'
+import TableComponent from '../components/tableComponent'
 
 const Profile = (props:any) => {
     return(
@@ -11,11 +12,9 @@ const Profile = (props:any) => {
       <Navbar/>
       <Toolbar/> 
       <Box p={3}> 
-         <> Profile </>
-         {
-          JSON.stringify(props.user)
-         }
-        </Box> 
+         
+        <TableComponent/>
+      </Box> 
       </>
       
        
@@ -31,7 +30,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       data: { session },
     } = await supabase.auth.getSession()
   
-    console.log(session)
     if (!session)
       return {
         redirect: {

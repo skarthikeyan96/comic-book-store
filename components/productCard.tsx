@@ -17,17 +17,29 @@ import {
 } from "@mui/material";
 import NextLink from "next/link";
 import { InfoRounded } from "@mui/icons-material";
+import { useDispatch } from "react-redux";
+
+
+import { addToCart } from "../redux/cart.slice";
 
 export default function MediaCard(props: any) {
   const { itemData } = props;
 
+  const dispatch = useDispatch();
+
+  const handleClick = (item:any) => {
+    dispatch(addToCart(item));
+  };
+
+
   return (
     <Grid container spacing={4}>
-      {itemData.map(({ image, name, price, id }: any) => {
+      {itemData.map((item: any) => {
+        const { image, name, price, id } = item
         return (
           <Grid item key={id}>
-            <Card>
-              <CardMedia component="img" image={image} alt={name} />
+            <Card sx={{ maxWidth: 345 }}>
+              <CardMedia component="img" height="140" image={image} alt={name} />
               <CardContent>
                 <Typography
                   gutterBottom
@@ -40,12 +52,12 @@ export default function MediaCard(props: any) {
                   </Link>
                 <Stack direction="row">
                   <Typography fontWeight={800} fontSize="1.5rem">
-                    $ {price}
+                  ₹ {Number.parseInt(price) * 70 }
                   </Typography>
                 </Stack>
               </CardContent>
               <CardActions>
-                <Button size="small" variant="contained" disableRipple>
+                <Button size="small" variant="contained" disableRipple  onClick={() => handleClick(item)}>
                   Add to cart
                 </Button>
               </CardActions>
