@@ -60,7 +60,8 @@ End user
 
 <img width="1440" alt="image" src="https://user-images.githubusercontent.com/23126394/208327106-0c4eeecb-b90b-4e6e-8ff2-bff07cfac9bb.png">
 
-
+*Twitter Status updates*
+[https://twitter.com/karthik_coder/status/1604335717320396800](https://twitter.com/karthik_coder/status/1604335717320396800)
 
 # Next steps
 
