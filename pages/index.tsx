@@ -18,7 +18,14 @@ export default function Home() {
 
       <main>
         <Toolbar />
-        <img src="https://images.hdqwalls.com/download/marvel-vs-dc-1u-1920x1080.jpg" alt="landing page"/>
+        <img src="https://images.hdqwalls.com/download/marvel-vs-dc-1u-1920x1080.jpg" alt="landing page" style={{
+              maxWidth: "100%",
+              overflow: "hidden",
+              objectFit: "cover",
+              width: "100%",
+              backgroundRepeat: "no-repeat",
+              backgroundAttachment: "fixed"
+        }}/>
       </main>
     </>
   );

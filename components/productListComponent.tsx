@@ -13,8 +13,7 @@ import IconButton from "@mui/material/IconButton";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { useDispatch, useSelector } from "react-redux";
 import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
-import { useSession } from "@supabase/auth-helpers-react";
-import toast, {Toaster} from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function ProductListComponent() {
   // Extracting cart state from redux store
@@ -23,8 +22,6 @@ export default function ProductListComponent() {
   // Reference to the dispatch function from redux store
   const dispatch = useDispatch();
 
-  const session = useSession();
-  
   const getTotalPrice = () => {
     return cart.reduce(
       (accumulator: number, item: { quantity: number; price: number }) =>
@@ -33,14 +30,9 @@ export default function ProductListComponent() {
     );
   };
 
-  const handleCheckout = () => {
-    if(!session){
-      initateCheckout(cart)
-    }
-
-    toast('Please login to checkout the products')
-   
-  }
+  const handleCheckout = async () => {
+    await initateCheckout(cart);
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -63,19 +55,26 @@ export default function ProductListComponent() {
               <TableCell component="th" scope="row">
                 <img src={row.image} height="90" width="65" />{" "}
               </TableCell>
-              <TableCell align="right"> ₹ {Number.parseInt(row.price) * 70}</TableCell>
+              <TableCell align="right">
+                {" "}
+                ₹ {Number.parseInt(row.price) * 70}
+              </TableCell>
               <TableCell align="right">{row.name}</TableCell>
               <TableCell align="right">{row.quantity}</TableCell>
               <TableCell align="right">
-                <Stack direction="row" justifyContent="flex-end" alignItems="center" spacing={3}>
+                <Stack
+                  direction="row"
+                  justifyContent="flex-end"
+                  alignItems="center"
+                  spacing={3}
+                >
                   <IconButton
                     aria-label="increase"
                     onClick={() => dispatch(incrementQuantity(row.id))}
                   >
                     <AddOutlinedIcon />
-                   
                   </IconButton>
-                  <Typography component="p" > {row.quantity} </Typography>
+                  <Typography component="p"> {row.quantity} </Typography>
                   <IconButton
                     aria-label="decrease"
                     onClick={() => dispatch(decrementQuantity(row.id))}
@@ -84,14 +83,23 @@ export default function ProductListComponent() {
                   </IconButton>
                 </Stack>
               </TableCell>
-              <Toaster/>
+              <Toaster />
             </TableRow>
           ))}
         </TableBody>
       </Table>
       <Box p={4} textAlign={"right"}>
-        <Typography> Grand Total: ₹ {Number.parseInt(getTotalPrice()) * 70} </Typography>
-        <Button variant="contained" sx={{marginTop: "1rem"}} onClick={handleCheckout}>Checkout</Button>
+        <Typography>
+          {" "}
+          Grand Total: ₹ {Number.parseInt(getTotalPrice()) * 70}{" "}
+        </Typography>
+        <Button
+          variant="contained"
+          sx={{ marginTop: "1rem" }}
+          onClick={handleCheckout}
+        >
+          Checkout
+        </Button>
       </Box>
     </TableContainer>
   );
