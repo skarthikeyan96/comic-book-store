@@ -46,7 +46,6 @@ const ViewProducts = (props: any) => {
       // disabled the RLS for products table
       setLoading(true);
       const products = await supabase.from("products").select("*");
-      console.log("products", products);
       setProducts(products.data);
       setLoading(false);
     })();

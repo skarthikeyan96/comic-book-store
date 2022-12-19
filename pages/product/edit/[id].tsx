@@ -18,7 +18,6 @@ const Edit = (props: any) => {
   const router = useRouter();
 
   const handleUpdate = async () => {
-    console.log(name, description, price, imageUrl);
 
     try {
       const { error } = await supabase

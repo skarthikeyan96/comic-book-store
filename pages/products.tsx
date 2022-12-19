@@ -8,8 +8,6 @@ import React from "react";
 import ProductCard from "../components/productCard";
 
 const Products = (props: any) => {
-
-  console.log(props);
   return (
     <>
       <Navbar />

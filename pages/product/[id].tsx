@@ -3,12 +3,19 @@ import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { GetServerSidePropsContext } from "next";
 import Navbar from "../../components/navbar";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/cart.slice";
 const ComicBook = (props: any) => {
 
-  console.log(props.product);
 
   const data = props.product.data[0];
 
+
+  const dispatch = useDispatch();
+
+  const handleClick = (item: any) => {
+    dispatch(addToCart(data));
+  };
   return (
     <>
       <Navbar />
@@ -36,6 +43,7 @@ const ComicBook = (props: any) => {
           <Stack direction="row" spacing={4} paddingTop={4}>
             <Button
               sx={{ fontWeight: "bold" }}
+              onClick={handleClick}
               startIcon={<ShoppingCartOutlinedIcon />}
               variant="contained"
             >

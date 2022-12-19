@@ -14,7 +14,6 @@ const New = () => {
   const router = useRouter();
 
   const handleCreate = async () => {
-    console.log(name, description, price, imageUrl);
 
     try {
       const { data, error } = await supabase

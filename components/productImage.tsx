@@ -22,11 +22,9 @@ export default function Avatar({
 
   async function downloadImage(path: string) {
     try {
-      console.log(path);
       const { data, error } = await supabase.storage
         .from("product-images")
         .download(path);
-      console.log(data);
       if (error) {
         throw error;
       }
