@@ -5,7 +5,16 @@ Simple Ecommerce app built using Next.js , Supabase, Stripe and Material UI.
 
 # Features 
 
-1. Standalone admin page ( publicly accessible ) 
+1. Standalone [admin](https://comic-book-store.vercel.app/products_admin) page ( publicly accessible ) 
+2. Stripe Integration for checkout. 
+3. Cart functionality.
+4. User authentication with magic links. 
+
+
+# Next steps
+
+1. Show the products visited by the user in their profile page.
+2. Show the products bought by the user. 
 
 
 
