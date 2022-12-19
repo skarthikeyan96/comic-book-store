@@ -13,7 +13,7 @@ const ComicBook = (props: any) => {
 
   const dispatch = useDispatch();
 
-  const handleClick = (item: any) => {
+  const handleClick = () => {
     dispatch(addToCart(data));
   };
   return (
