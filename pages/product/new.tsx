@@ -3,12 +3,15 @@ import React from "react";
 import supabase from "../../lib/supabase";
 import toast, { Toaster } from "react-hot-toast";
 import AdminNavbar from "../../components/adminNavbar";
+import { useRouter } from "next/router";
 
 const New = () => {
   const [name, setName] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [price, setPrice] = React.useState(0);
   const [imageUrl, setImageUrl] = React.useState("");
+
+  const router = useRouter();
 
   const handleCreate = async () => {
     console.log(name, description, price, imageUrl);
@@ -21,7 +24,7 @@ const New = () => {
       console.log(error);
 
       if (data) {
-        toast("product added succesfully");
+        router.push('/products_admin')
       }
 
       if (error) {

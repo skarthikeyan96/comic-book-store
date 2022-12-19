@@ -34,7 +34,7 @@ export default function ProductListComponent() {
   };
 
   const handleCheckout = () => {
-    if(session){
+    if(!session){
       initateCheckout(cart)
     }
 
